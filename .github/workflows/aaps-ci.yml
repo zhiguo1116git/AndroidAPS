@@ -234,6 +234,12 @@ jobs:
               -Pandroid.injected.signing.key.alias="$KEY_ALIAS" \
               -Pandroid.injected.signing.key.password="$KEY_PASSWORD"
 
+      - name: Upload APK to Github Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: aaps-apk
+          path: app/build/outputs/apk/full/release/*.apk
+
       - name: Rename APKs with version
         run: |
           mv app/build/outputs/apk/${{ env.VARIANT_FLAVOR }}/${{ env.VARIANT_TYPE }}/*.apk aaps-${{ env.VERSION }}${{ env.VERSION_SUFFIX }}.apk
